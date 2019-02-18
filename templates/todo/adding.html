@@ -1,0 +1,11 @@
+{% extends 'todo/base.html' %}
+
+{% block body_block %}
+
+<form enctype="multipart/form-data" method="POST">
+          {% csrf_token %}
+          {{ task_form.as_p }}
+          <input type="submit" name="" value="Add Task">
+        </form>
+
+{% endblock %}

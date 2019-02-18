@@ -1,0 +1,38 @@
+{% extends 'todo/base.html' %}
+
+{% block body_block %}
+    <div class="row">
+        {% for task in tasks %}
+
+            <div class="col-lg-4" style="background-color: rgb(170, 240, 120); border: 4px solid white">
+                <h4><b>Title:</b> {{ task.title }}</h4>
+                <form action="{% url 'tasks' %}" method="post">
+                    {% csrf_token %}
+                    <input type="submit" name="{{ task.id }}" value="Delete" />
+                </form>
+                <h5><b>Category:</b> {{ task.category.category }}</h5>
+                <h5><b>Priority:</b> {{ task.priority }}</h5>
+                <h5><b>Due date:</b> {{ task.due_time }}</h5>
+                <p class="text-justify"><b>Task:</b> {{  task.task }}</p>
+            </div>
+
+        {% endfor %}
+    </div>
+
+    <div class="row">
+        {% for item in failed %}
+
+            <div class="col-lg-4" style="background-color: rgb(240, 120, 120); border: 4px solid white">
+                <h4>Title: {{ item.title }}</h4>
+                <form action="{% url 'tasks' %}" method="post">
+                    {% csrf_token %}
+                    <input type="submit" name="{{ item.id }}" value="Delete" />
+                </form>
+                <h5>Category: {{ item.category.category }}</h5>
+                <h5>Priority: {{ item.priority }}</h5>
+                <h5>Due date: {{ item.due_time }}</h5>
+                <p class="text-justify">Task: {{  item.task }}</p>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
